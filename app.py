@@ -8,6 +8,7 @@ sys.path.append(str(Path(__file__).parent))
 from config.settings import OPENAI_API_KEY
 from src.rag.rag_system import RAGSystem
 from src.agent.ai_agent import AIAgent
+from demo import demo_mode
 
 st.set_page_config(
     page_title="RAGエージェントシステム",
@@ -22,6 +23,14 @@ def main():
     
     # サイドバーでモード選択
     st.sidebar.title("⚙️ システム設定")
+    
+    # デモモード選択
+    demo_mode_enabled = st.sidebar.checkbox("🎬 デモモード（APIキー不要）")
+    
+    if demo_mode_enabled:
+        demo_mode()
+        return
+    
     mode = st.sidebar.radio(
         "動作モード",
         ["RAGシステム（中間課題①）", "AIエージェント（中間課題②）"]
